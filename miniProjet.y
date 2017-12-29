@@ -7,7 +7,7 @@ extern void yyerror(char *);
 %%
 void yyerror(char *msg)
 {
-    printf("%s\n",msg);
+    pintf("%s\n",msg);
 }
 void main(void)
 {
