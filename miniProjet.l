@@ -1,5 +1,5 @@
 %{
-
+ #include "miniProjet.tab.h"
 %}
 %%
 

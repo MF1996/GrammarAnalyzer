@@ -1,5 +1,6 @@
 %{
-extern void
+extern void yyerror(char *);
+#include <stdio.h>
 %}
 %%
 
