@@ -1,15 +1,14 @@
 %{
 extern void yyerror(char *);
+int yylex();
 #include <stdio.h>
 %}
 %%
 
-%token PROGRAMME DEBUT FIN CONST PV EG VAR DP DPEG PLUS Ent SI AlOR FSI SINON VR VRAI FAUX LTR CHFR
+%token PROGRAMME DEBUT FIN CONST PV EG VAR DP DPEG PLUS Ent SI AlOR FSI SINON VR VRAI FAUX ident Cste
 %%
-SP: S NL {pintf("programme accepté");exit(0);}
-  ;
 S:
-  PROGRAMME IDENT PV D DEBUT INST FIN
+  PROGRAMME ident PV D DEBUT INST FIN {pintf("programme accepté");exit(0);}
  ;
 D:
  C V
@@ -19,16 +18,16 @@ C:
   |
  ;
 DEC:
- IDENT EG NUM PV DEC
- |IDENT EG NUM
+ ident EG NUM PV DEC
+ |ident EG NUM
  ;
 V:
  VAR DEV
  |
  ;
 DEV:
- IDENT M DP TYPE PV DEV
- |IDENT M DP TYPE
+ ident M DP TYPE PV DEV
+ |ident M DP TYPE
  ;
 TYPE:
  ENT
@@ -39,47 +38,28 @@ INST:
  |
  ;
 INSTR:
- IDENT DPEG EXP I
- |SI IDENT ALORS INSTR SINON INSTR FSI
- |SI IDENT ALORS INSTR FSI
+ ident DPEG XE I
+ |SI ident ALORS INSTR SINON INSTR FSI
+ |SI ident ALORS INSTR FSI
  ;
 I: 
  PV INSTR
  |
  ;
+ XE : ident EXP
+ 
 EXP:
-EXP PLUS EXP
- |IDENT
- |CSTE
- ;
-IDENT: 
- LETTRE SUITL
- ;
-SUITL
- LETTRE SUITL
- |CHIFFRE SUITL
- |
-;
-LETTRE:
- LTR
- ;
-CHIFFRE:
- CHFR
- ;
-CSTE:
- CHIFFRE SUITC
- |
- ;
-SUITC:
- SUITC CHIFFRE 
- | 
+  PLUS ident EXP
+ |PLUS Cste EXP
+ | ident
+ |Cste
  ;
 M:
- VR IDENT M 
+ VR ident M 
  |
  ;
 NUM:
- CSTE
+ Cste
  |VRAI
  |FAUX
  ; 
