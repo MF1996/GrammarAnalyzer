@@ -20,6 +20,6 @@
 "," return VR;
 "vrai" return VRAI;
 "false" return FAUX;
-[a-zA-Z] return LTR;
-[0-9] return CHFR;
+[a-z]([a-z]|[0-9])* return ident;
+[0-9]+ return Cste;
 %%
