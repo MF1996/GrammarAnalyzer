@@ -47,7 +47,9 @@ I:
  |
  ;
  XE : ident EXP
- 
+    | Cste EXP
+  
+  
 EXP:
   PLUS ident EXP
  |PLUS Cste EXP
